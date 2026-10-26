@@ -1,0 +1,12 @@
+{
+  "engine": "transformers",
+  "total_requests": 5,
+  "concurrency": 2,
+  "successful_requests": 5,
+  "failed_requests": 0,
+  "total_duration_seconds": 9.58,
+  "requests_per_second": 0.522,
+  "average_latency_seconds": 3.564,
+  "p50_latency_seconds": 3.645,
+  "p95_latency_seconds": 4.859
+}

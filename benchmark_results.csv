@@ -1,0 +1,2 @@
+timestamp,model,device,successful_requests,average_latency_seconds,median_latency_seconds,min_latency_seconds,max_latency_seconds,average_words_per_second
+2026-10-19T19:09:23,Qwen/Qwen2.5-1.5B-Instruct,cuda:0,5,2.016,1.994,1.915,2.191,18.89
