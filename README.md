@@ -6,7 +6,7 @@ A local benchmarking platform for comparing Large Language Model (LLM) inference
 
 
 
-InferBench helps measure model inference performance, track request-level metrics, and compare different inference backends using a consistent API.
+InferBench helps measure inference performance, monitor request-level metrics, and compare supported inference backends through a consistent API.
 
 
 
@@ -14,11 +14,11 @@ InferBench helps measure model inference performance, track request-level metric
 
 
 
-Running an LLM locally can produce different performance results depending on the inference engine, model, hardware, and generation settings.
+Large Language Models can behave differently depending on the inference engine, model size, hardware, and generation settings.
 
 
 
-InferBench provides a single interface to send prompts to supported inference backends, collect performance metrics, and visualize benchmark results.
+InferBench provides a unified interface for sending prompts to supported inference backends, collecting performance metrics, and visualizing benchmark results through a web dashboard.
 
 
 
@@ -30,21 +30,23 @@ The project currently integrates Hugging Face Transformers and Ollama.
 
 
 
-\- \*\*Unified Inference API:\*\* Generate text through a FastAPI backend.
+\- \*\*Unified Inference API:\*\* Generate text through a FastAPI gateway.
 
-\- \*\*Multiple Inference Engines:\*\* Supports Hugging Face Transformers and Ollama.
+\- \*\*Multiple Inference Engines:\*\* Supports Transformers and Ollama.
 
-\- \*\*Performance Metrics:\*\* Track request latency, time to first token (TTFT), input tokens, and output tokens where available.
+\- \*\*Performance Monitoring:\*\* Track request latency and time to first token (TTFT), where available.
 
-\- \*\*Benchmark Statistics:\*\* Review aggregate metrics such as average latency, percentile latency, and output throughput.
+\- \*\*Token Metrics:\*\* Track input and output token counts supported by the implementation.
 
-\- \*\*Interactive Dashboard:\*\* React-based interface for monitoring requests and visualizing performance.
+\- \*\*Benchmark Statistics:\*\* Review average, P50, P95, and P99 latency, along with output throughput.
 
-\- \*\*Request History:\*\* Review benchmark activity and export supported results to CSV.
+\- \*\*Interactive Dashboard:\*\* Visualize inference performance using a React frontend.
 
-\- \*\*Health Monitoring:\*\* Check backend and model status through a health endpoint.
+\- \*\*Request History:\*\* Review recorded requests and export supported results to CSV.
 
-\- \*\*Load Testing:\*\* Use Locust to simulate concurrent requests and evaluate API behavior under load.
+\- \*\*Health Check:\*\* Monitor backend and model status.
+
+\- \*\*Load Testing:\*\* Use Locust to simulate concurrent API requests.
 
 
 
@@ -52,21 +54,23 @@ The project currently integrates Hugging Face Transformers and Ollama.
 
 
 
-| Component | Technologies |
+| Component | Technology |
 
 |---|---|
 
-| Backend API | Python, FastAPI, Pydantic |
+| Programming Language | Python, JavaScript |
+
+| Backend | FastAPI, Pydantic |
 
 | LLM Inference | Hugging Face Transformers, PyTorch, Ollama |
 
-| Models | Qwen2.5-1.5B-Instruct, Qwen2.5 0.5B through Ollama |
+| Models | Qwen2.5-1.5B-Instruct, Qwen2.5 0.5B |
 
-| Frontend | React, Vite, JavaScript |
+| Frontend | React, Vite |
 
 | Data Visualization | Recharts |
 
-| API Testing | FastAPI Swagger UI |
+| API Documentation | Swagger UI |
 
 | Load Testing | Locust |
 
@@ -74,59 +78,59 @@ The project currently integrates Hugging Face Transformers and Ollama.
 
 
 
-\## Architecture
+\## System Architecture
 
 
 
 ```text
 
-&#x20;                User
+&#x20;                    User
 
-&#x20;                 |
+&#x20;                     |
 
-&#x20;                 v
+&#x20;                     v
 
-&#x20;       React Dashboard (Vite)
+&#x20;            React Dashboard
 
-&#x20;                 |
+&#x20;               (Vite)
 
-&#x20;                 v
+&#x20;                     |
 
-&#x20;         FastAPI Gateway
+&#x20;                     v
 
-&#x20;                 |
+&#x20;              FastAPI Gateway
 
-&#x20;         +-------+-------+
+&#x20;                     |
 
-&#x20;         |               |
+&#x20;             +-------+-------+
 
-&#x20;         v               v
+&#x20;             |               |
 
-&#x20;Hugging Face          Ollama
+&#x20;             v               v
 
-&#x20;Transformers          Runtime
+&#x20;       Transformers        Ollama
 
-&#x20;         |               |
+&#x20;             |               |
 
-&#x20;         v               v
+&#x20;             v               v
 
-&#x20;  Qwen2.5-1.5B       Qwen2.5 0.5B
+&#x20;     Qwen2.5-1.5B       Qwen2.5 0.5B
 
-&#x20;         |               |
+&#x20;             |               |
 
-&#x20;         +-------+-------+
+&#x20;             +-------+-------+
 
-&#x20;                 |
+&#x20;                     |
 
-&#x20;                 v
+&#x20;                     v
 
-&#x20;      Performance Metrics
+&#x20;            Performance Metrics
 
-&#x20;                 |
+&#x20;                     |
 
-&#x20;                 v
+&#x20;                     v
 
-&#x20;      Dashboard / CSV Export
+&#x20;             Dashboard / CSV
 
 ```
 
@@ -140,31 +144,37 @@ The project currently integrates Hugging Face Transformers and Ollama.
 
 llm-serving-benchmark/
 
-├── gateway/
+|
 
-│   ├── main.py
+|-- gateway/
 
-│   └── model\_test.py
+|   |-- main.py
 
-├── frontend/
+|   |-- model\_test.py
 
-│   ├── src/
+|
 
-│   ├── package.json
+|-- frontend/
 
-│   └── vite.config.js
+|   |-- src/
 
-├── locustfile.py
+|   |-- package.json
 
-├── .gitignore
+|   |-- vite.config.js
 
-└── README.md
+|
+
+|-- locustfile.py
+
+|-- .gitignore
+
+|-- README.md
 
 ```
 
 
 
-\*The exact files may vary as the project evolves.\*
+The exact project structure may change as additional features are developed.
 
 
 
@@ -172,29 +182,29 @@ llm-serving-benchmark/
 
 
 
-\- Windows, Linux, or macOS
-
-\- Python 3.10 or a compatible Python version for the installed dependencies
+\- Python and pip
 
 \- Node.js and npm
 
 \- Git
 
-\- Ollama for running the Ollama backend
+\- Ollama for the Ollama inference backend
 
-\- A compatible local model and sufficient RAM/VRAM
+\- A compatible local model
 
-
-
-GPU acceleration depends on the installed PyTorch build, drivers, and supported hardware. CPU execution may also be possible, but performance will differ.
+\- Sufficient RAM and GPU memory for the selected model
 
 
 
-\## Installation and Setup
+GPU acceleration depends on the installed PyTorch build, NVIDIA drivers, and compatible hardware. CPU execution may also be possible, with different performance.
 
 
 
-\### 1. Clone the repository
+\## Installation
+
+
+
+\### 1. Clone the Repository
 
 
 
@@ -208,7 +218,7 @@ cd llm-serving-benchmark
 
 
 
-\### 2. Set up the Python environment
+\### 2. Create a Python Virtual Environment
 
 
 
@@ -226,7 +236,7 @@ python -m venv .venv
 
 
 
-If PowerShell blocks script execution, run this in the current terminal:
+If PowerShell blocks script execution, run:
 
 
 
@@ -240,7 +250,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 
 
 
-Install the project's required Python dependencies. If a `requirements.txt` file is present, run:
+Install the Python dependencies using the project's dependency file, if available:
 
 
 
@@ -252,11 +262,11 @@ python -m pip install -r requirements.txt
 
 
 
-If the repository does not contain `requirements.txt`, install the dependencies listed in the project setup or create the file from the packages used by the backend.
+If `requirements.txt` is not present, install the dependencies used by the backend or add a dependency file to the repository.
 
 
 
-\### 3. Start Ollama
+\### 3. Set Up Ollama
 
 
 
@@ -268,7 +278,7 @@ https://ollama.com/
 
 
 
-Download the model used by this project:
+Download the model:
 
 
 
@@ -280,7 +290,7 @@ ollama pull qwen2.5:0.5b
 
 
 
-Verify that Ollama is running and the model is available:
+Verify the installed model:
 
 
 
@@ -292,19 +302,19 @@ ollama list
 
 
 
-Ollama must be running locally for requests using the Ollama backend.
+Make sure the Ollama service is running before sending requests to the Ollama backend.
 
 
 
-\### 4. Start the FastAPI backend
+\### 4. Start the FastAPI Backend
 
 
 
-From the project root, use the command matching the actual Python module and FastAPI application object in your repository.
+From the project root, run the command matching the location of your FastAPI application.
 
 
 
-For example, if the application object is `app` inside `gateway/main.py`:
+If the application object is named `app` inside `gateway/main.py`, use:
 
 
 
@@ -316,7 +326,7 @@ python -m uvicorn gateway.main:app --reload
 
 
 
-The API will normally be available at:
+The backend will normally run at:
 
 
 
@@ -340,7 +350,11 @@ http://127.0.0.1:8000/health
 
 
 
-\### 5. Start the React dashboard
+Keep the backend terminal running while using the frontend.
+
+
+
+\### 5. Start the React Frontend
 
 
 
@@ -360,7 +374,7 @@ npm run dev
 
 
 
-Open the local URL displayed by Vite in your terminal, commonly:
+Open the local URL displayed by Vite in the terminal. It is commonly:
 
 
 
@@ -368,7 +382,7 @@ http://localhost:5173
 
 
 
-Keep the backend running while using the dashboard. If the frontend cannot connect, verify the API URL and backend CORS configuration.
+If the frontend cannot connect to the backend, check that the backend is running and the API URL and CORS settings are correct.
 
 
 
@@ -380,15 +394,11 @@ Keep the backend running while using the dashboard. If the frontend cannot conne
 
 
 
-```http
-
-GET /health
-
-```
+\*\*Endpoint:\*\* `GET /health`
 
 
 
-This endpoint reports the backend's health and relevant model or hardware status supported by the implementation.
+This endpoint reports backend health and the model or hardware status provided by the implementation.
 
 
 
@@ -396,17 +406,15 @@ This endpoint reports the backend's health and relevant model or hardware status
 
 
 
-```http
-
-POST /generate
-
-Content-Type: application/json
-
-```
+\*\*Endpoint:\*\* `POST /generate`
 
 
 
-Example request for the Transformers backend:
+\*\*Content-Type:\*\* `application/json`
+
+
+
+\#### Example: Transformers
 
 
 
@@ -426,7 +434,7 @@ Example request for the Transformers backend:
 
 
 
-Example request for Ollama:
+\#### Example: Ollama
 
 
 
@@ -446,7 +454,7 @@ Example request for Ollama:
 
 
 
-The accepted engine names and request fields depend on the current backend implementation. Use `/docs` to inspect the live API schema.
+The accepted engine names and request parameters depend on the backend implementation. Visit `/docs` to see the actual request schema.
 
 
 
@@ -454,7 +462,7 @@ The accepted engine names and request fields depend on the current backend imple
 
 
 
-InferBench is designed to help analyze:
+InferBench is designed to help evaluate inference performance using metrics such as:
 
 
 
@@ -466,11 +474,11 @@ InferBench is designed to help analyze:
 
 | Time to First Token (TTFT) | Time until the first generated output becomes available |
 
-| Input Tokens | Number of tokens in the prompt, when measured |
+| Input Tokens | Number of tokens in the input prompt, when measured |
 
 | Output Tokens | Number of generated tokens, when measured |
 
-| Average Latency | Mean request latency across recorded requests |
+| Average Latency | Mean request latency |
 
 | P50 Latency | Median request latency |
 
@@ -482,7 +490,7 @@ InferBench is designed to help analyze:
 
 
 
-Actual metrics depend on the engine, model, hardware, generation settings, and measurement methodology. Compare engines using the same workload wherever possible.
+Actual results depend on the selected model, inference engine, hardware, prompt, generation settings, and measurement methodology.
 
 
 
@@ -494,7 +502,7 @@ Locust can simulate multiple users sending requests to the inference API.
 
 
 
-If `locustfile.py` is configured for the project's current API, start the load test from the project root:
+Install Locust:
 
 
 
@@ -502,13 +510,23 @@ If `locustfile.py` is configured for the project's current API, start the load t
 
 python -m pip install locust
 
+```
+
+
+
+From the project root, run the following command if `locustfile.py` is configured for the current API:
+
+
+
+```powershell
+
 python -m locust -f locustfile.py --host http://127.0.0.1:8000
 
 ```
 
 
 
-Open the local web interface shown by Locust, commonly:
+Open the URL shown by Locust, commonly:
 
 
 
@@ -516,37 +534,39 @@ http://localhost:8089
 
 
 
-Start with a small number of users and increase concurrency gradually. Local model inference can consume significant memory and GPU resources.
+Start with a small number of users and increase concurrency gradually. Local LLM inference can use significant CPU, GPU, and memory resources.
 
 
 
-Record the number of users, request rate, failure rate, latency percentiles, model, engine, and generation settings when comparing results.
+For each test, record the engine, model, number of users, request rate, failure rate, latency percentiles, and generation settings.
 
 
 
-\## Reproducible Benchmarking
+\## Benchmarking Methodology
 
 
 
-For a meaningful comparison:
+For a fair comparison between inference engines:
 
 
 
-1\. Use the same prompt set and generation settings.
+1\. Use the same prompts and generation settings where possible.
 
-2\. Warm up each engine before collecting measurements.
+2\. Warm up each engine before measuring performance.
 
 3\. Run multiple requests for each configuration.
 
-4\. Keep the hardware and background workload as consistent as possible.
+4\. Keep hardware and background workloads as consistent as possible.
 
 5\. Record latency, TTFT, throughput, and request failures.
 
-6\. Report the actual results instead of assuming one engine is faster.
+6\. Document the model and engine used for every result.
+
+7\. Report measured results rather than assuming one engine is faster.
 
 
 
-Transformers and Ollama may use different model sizes and runtime configurations in this project, so results should include the model and engine used for each test.
+The Transformers and Ollama configurations may use different model sizes and runtime implementations. Document these differences when interpreting results.
 
 
 
@@ -554,15 +574,15 @@ Transformers and Ollama may use different model sizes and runtime configurations
 
 
 
-\- Performance depends on the available hardware and model configuration.
+\- Performance depends on hardware, model size, and runtime configuration.
 
-\- Large models may not fit into limited GPU memory.
+\- Larger models may exceed available GPU memory.
 
-\- Different engines and model sizes are not directly comparable without clearly stated test conditions.
+\- Results from different model sizes are not directly comparable without explaining the test conditions.
 
-\- Results from a local laptop should not be treated as production-server benchmarks.
+\- Laptop benchmark results may differ significantly from production-server results.
 
-\- vLLM and llama.cpp should only be considered supported once their integrations have been implemented and tested.
+\- vLLM and llama.cpp are not claimed as supported backends in the current implementation.
 
 
 
@@ -570,17 +590,17 @@ Transformers and Ollama may use different model sizes and runtime configurations
 
 
 
-\- Add vLLM and llama.cpp backend integrations.
+\- Integrate additional inference engines such as vLLM and llama.cpp.
 
-\- Add repeatable benchmark suites and downloadable result reports.
+\- Add repeatable benchmark suites and automated result reports.
 
-\- Compare throughput across controlled concurrency levels.
+\- Compare throughput under controlled concurrency levels.
 
-\- Add automated benchmark runs and historical result comparisons.
+\- Add historical benchmark comparisons.
 
-\- Improve error handling, configuration management, and automated tests.
+\- Expand automated testing and error handling.
 
-\- Add deployment support for a suitable server environment.
+\- Add deployment support for suitable server environments.
 
 
 
@@ -600,5 +620,5 @@ GitHub: https://github.com/riaw22-hue
 
 
 
-This project is intended for educational and portfolio use. Add a `LICENSE` file to specify the terms under which others may use, modify, and distribute the code.
+This project is intended for educational and portfolio purposes. A `LICENSE` file can be added to define the permissions for using, modifying, and distributing the project.
 
