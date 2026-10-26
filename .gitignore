@@ -8,3 +8,7 @@ dist/
 gateway/*.backup
 frontend/src/*.backup
 results/
+
+models/*.gguf
+
+models/*.gguf
